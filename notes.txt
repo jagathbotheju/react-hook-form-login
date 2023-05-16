@@ -1,0 +1,62 @@
+//noValidate - prevents browser validation
+/**
+ * for dynamic fields
+ * =================
+ * 1 - import useFieldArray from react-hook-form
+ * 2 - insert type, phNumbers to FormValues, works only on objects
+ * 3 - need to specify pnNumbers field, as an Array of fields, using useFieldArray
+ * 4 - add jsx
+ *
+ * grouping fields ex. to match with API submission/save into db
+ * =============================================================
+ * - using nested object in react hook form
+ * 1 - declare nested object, phoneNumbers in FormValues Type
+ * 2 - declare in defaultValues
+ * 3 - add jsx
+ *
+ * save default values from previous/API data
+ * ==========================================
+ * =useForm<FormValues>({
+ *  defaultValues=async()=>{
+ *    const res=await fetch('https://jsonplaceholder.typicode/users/1')
+ *    const data=await res.json()
+ *    return {
+ *      username:data.name,
+ *      email:data.email,
+ *      channel:''
+ *    }
+ *  }
+ * })
+ */
+
+ form submit state
+ =================
+ disabled={!isDirty || !isValid}
+
+ isSubmitting - default, false,when submitting, true, when complete submission, false.
+ disable form when the form is submitting, to avoid multiple submission.
+ <button
+            disabled={!isDirty || !isValid || isSubmitting}
+            className="bg-blue-400 border py-2 px-4 rounded disabled:bg-gray-500"
+          >
+
+ isSubmitted - default false, after submit true, remains true until form is reset.
+ isSubmitSuccessful - if form submission successful true or false.
+ submitCount - number of times form submitted.
+
+ reset - to reset values into default values or after form submission.
+
+
+validation modes
+================
+onSubmit - default
+onBlur - when focus and blur out of a form field
+onTouched - on first blur event after that every change event.
+onChange - on every change (multiple re-renders - do not use)
+all - on both onBlur and onChange events
+
+trigger
+=======
+- manually trigger validation
+<button type='button' onClick={()=>trigger()}>Validate</button>
+<button type='button' onClick={()=>trigger('channel')}>Validate</button>
